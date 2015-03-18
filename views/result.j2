@@ -1,6 +1,7 @@
 {% extends "base.j2" %}
 
 {% block content %}
+{{ b }}
 {{a}}の検索結果です。
 {% for i in range(titles | length) %}
 	<li><a href="{{ urls[i] }}">{{ titles[i] }}</a></li>
