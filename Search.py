@@ -5,6 +5,7 @@ import urllib2
 import urllib
 import gzip
 import StringIO
+from bs4 import BeautifulSoup
 from bottle import route, run, get, request
 from bottle import TEMPLATE_PATH, jinja2_template as template
 
@@ -45,6 +46,22 @@ def sof_search(word):
     finally:
         r.close()
     return urls, titles
+
+
+# teratail検索用
+def tera_search(word):
+    tera_url = 'https://teratail.com/questions/search?q=' + \
+        word + '&search_type=and'
+    titles = []
+    urls = []
+    r = urllib2.urlopen(tera_url)
+    soup = BeautifulSoup(r.read())
+    s = soup.find_all("h2", {"class": "ttlItem"})
+    for lis in s:
+        titles.append(lis.string)
+        urls.append(lis.a['herf'])
+    r.close()
+    return titles, urls
 
 
 @route('/')
