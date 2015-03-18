@@ -1,0 +1,10 @@
+{% extends "base.j2" %}
+
+{% block content %}
+    Hello {{ name }}! How are you?
+    <form action="/search" method="get">
+      <input type = "text" name = "search_word">
+      <input type="submit" value="検索">
+    </form>
+    <br/>
+{% endblock %}
