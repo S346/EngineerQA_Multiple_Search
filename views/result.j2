@@ -1,9 +1,26 @@
 {% extends "base.j2" %}
 
 {% block content %}
-{{ b }}
-{{a}}の検索結果です。
+    <h1>EngineerQA_Multiple_Search</h1>
+    <form action="/search" method="get">
+      <input type="text" name="search_word" value="{{ search_word }}">
+      <input type="submit" value="検索"><br/>
+      <input type="checkbox" name="need" value="sof" id="1" {% if "sof" in ch %}checked{% endif %}><label for="1">Stack Over Flow</label>
+      <input type="checkbox" name="need" value="qiita" id ="2" {% if "qiita" in ch %}checked{% endif %}><label for="2">Qiita</label>
+      <input type="checkbox" name="need" value="tera" id="3" {% if "tera" in ch %}checked{% endif %}><label for="3">teratail</label>
+      <input type="checkbox" name="need" value="qait" id="4" {% if "qait" in ch %}checked{% endif %}><label for="4">QA@IT</label>
+    </form>
+    <br/>
+{{ search_word }}の検索結果です。</br>
 {% for i in range(titles | length) %}
-	<li><a href="{{ urls[i] }}">{{ titles[i] }}</a></li>
+	{{ ch[i] }}</br>
+	{% if not titles[i] %}
+		検索結果が見つかりませんでした。
+	{% else %}
+		{% for j in range(titles[i] | length) %}
+			<li><a href="{{ urls[i][j] }}" target="_blank">{{ titles[i][j] }}</a></li>
+		{% endfor %}
+	{% endif %}
+	</br>
 {% endfor %}
 {% endblock %}

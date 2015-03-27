@@ -88,11 +88,26 @@ def search():
     # formの値を取得→utf-8に変換→クエリ用の値に変換
     word = urllib.quote_plus(request.query.search_word.encode('utf-8'))
     ch = request.params.getlist('need')
-    # urls, titles = qiita_search(word)
-    # urls, titles = sof_search(word)
-    # urls, titles = tera_search(word)
-    urls, titles = qait_search(word)
+    urls = []
+    titles = []
+    if "sof" in ch:
+        url, title = sof_search(word)
+        urls.append(url)
+        titles.append(title)
+    if "qiita" in ch:
+        url, title = qiita_search(word)
+        urls.append(url)
+        titles.append(title)
+    if "tera" in ch:
+        url, title = tera_search(word)
+        urls.append(url)
+        titles.append(title)
+    if "qait" in ch:
+        url, title = qait_search(word)
+        urls.append(url)
+        titles.append(title)
     word_utf8 = urllib.unquote_plus(word).decode('utf-8')
-    return template('result.j2', a=word_utf8, titles=titles, urls=urls, b=ch)
+    return template('result.j2', search_word=word_utf8,
+                    titles=titles, urls=urls, ch=ch)
 
 run(host='localhost', port=8080, debug=True, reloader=True)

@@ -1,14 +1,14 @@
 {% extends "base.j2" %}
 
 {% block content %}
-    EngineerQA_Multiple_Search
+    <h1>EngineerQA_Multiple_Search</h1>
     <form action="/search" method="get">
       <input type = "text" name = "search_word">
       <input type="submit" value="検索"><br/>
-      <input type="checkbox" name="need" value="sof" id="1"><label for="1">Stack Over Flow</label>
-      <input type="checkbox" name="need" value="qiita" id ="2"><label for="2">Qiita</label>
-      <input type="checkbox" name="need" value="tera" id="3"><label for="3">teratail</label>
-      <input type="checkbox" name="need" value="qait" id="4"><label for="4">QA@IT</label>
+      <input type="checkbox" name="need" value="sof" id="1" checked><label for="1">Stack Over Flow</label>
+      <input type="checkbox" name="need" value="qiita" id ="2" checked><label for="2">Qiita</label>
+      <input type="checkbox" name="need" value="tera" id="3" checked><label for="3">teratail</label>
+      <input type="checkbox" name="need" value="qait" id="4" checked><label for="4">QA@IT</label>
     </form>
     <br/>
 {% endblock %}
